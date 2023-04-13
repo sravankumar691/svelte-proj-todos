@@ -1,6 +1,19 @@
-<script>
+<script lang="ts">
+  import { each, prevent_default } from "svelte/internal";
   import TodoItem from "./TodoItem.svelte";
-
+  export let todos:todoType[];
+  let value:string='';
+  const handleChange=(e)=>{
+    value=e.target.value
+  }
+  const submitForm=()=>{
+    todos=[...todos,{
+        isCompleted:false,
+        uid:Date.now().toString(),
+        text:value
+    }]
+    value=''
+  }
 </script>
 
 <style>
@@ -32,16 +45,14 @@
 }
 </style>
 <section class="card">
-<input />
+<form on:submit|preventDefault={submitForm}>
+    <input bind:value={value} on:change={handleChange} />
+</form>
 <ul>
+   {#each todos as todo }
     <li>
-        <TodoItem/>
+        <TodoItem todo={todo}/>
     </li>
-    <li>
-        <TodoItem/>
-    </li>
-    <li>
-        <TodoItem/>
-    </li>
+   {/each}
 </ul>
 </section>

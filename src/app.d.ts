@@ -1,12 +1,5 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
-declare global {
-	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface Platform {}
-	}
-}
-
-export {};
+type todoType = {
+  isCompleted: boolean;
+  text: string;
+  uid: string;
+};
